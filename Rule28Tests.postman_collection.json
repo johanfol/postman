@@ -26,8 +26,6 @@
 							"pm.test(\"should respond with correct transaction\", function () {",
 							"    const requestTransaction = JSON.parse(pm.request.body.raw).transaction;",
 							"    const responseTransaction = pm.response.json().transaction;",
-							"    console.log(requestTransaction)",
-							"    console.log(pm.response.json())",
 							"    pm.expect(requestTransaction).to.eql(responseTransaction);",
 							"});",
 							"",
