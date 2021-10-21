@@ -29,12 +29,6 @@
 							"    const requestTransaction = JSON.parse(pm.request.body.raw).transaction;",
 							"    const responseTransaction = pm.response.json().transaction;",
 							"    pm.expect(requestTransaction).to.eql(responseTransaction);",
-							"});",
-							"",
-							"",
-							"pm.test(\"should return the correct age band\", function () {",
-							"    const response = pm.response.json().ruleResult;",
-							"    pm.expect(response.subRuleRef).to.eql(\"04\")",
 							"});"
 						],
 						"type": "text/javascript"
@@ -86,14 +80,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"",
-							"pm.test(\"should return the correct age band 01\", function () {",
+							"pm.test(\"should return the correct age band 01 for age 0\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"01\")",
 							"});"
@@ -147,13 +138,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 01\", function () {",
+							"pm.test(\"should return the correct age band 01 for age 17\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"01\")",
 							"});"
@@ -207,13 +196,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 02\", function () {",
+							"pm.test(\"should return the correct age band 02 for age 18\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"02\")",
 							"});"
@@ -267,13 +254,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 02\", function () {",
+							"pm.test(\"should return the correct age band 02 for age 29\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"02\")",
 							"});"
@@ -327,13 +312,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 03\", function () {",
+							"pm.test(\"should return the correct age band 03 for age 30\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"03\")",
 							"});"
@@ -387,13 +370,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 03\", function () {",
+							"pm.test(\"should return the correct age band 03 for age 49\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"03\")",
 							"});"
@@ -447,13 +428,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 04\", function () {",
+							"pm.test(\"should return the correct age band 04 for age 50\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"04\")",
 							"});"
@@ -507,13 +486,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 04\", function () {",
+							"pm.test(\"should return the correct age band 04 for age 51\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"04\")",
 							"});"
@@ -567,13 +544,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 04\", function () {",
+							"pm.test(\"should return the correct age band 04 for age 99\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"04\")",
 							"});"
@@ -627,13 +602,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"",
-							"",
 							"pm.test(\"should have status code of 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should return the correct age band 00\", function () {",
+							"pm.test(\"should return the correct age band 00 for age -1\", function () {",
 							"    const response = pm.response.json().ruleResult;",
 							"    pm.expect(response.subRuleRef).to.eql(\"00\")",
 							"});"
