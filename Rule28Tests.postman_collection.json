@@ -57,13 +57,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/execute",
-					"protocol": "http",
+					"raw": "https://frmfaas.sybrin.com/function/off-rule-028/execute",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"frmfaas",
+						"sybrin",
+						"com"
 					],
-					"port": "3000",
 					"path": [
+						"function",
+						"off-rule-028",
 						"execute"
 					]
 				}
