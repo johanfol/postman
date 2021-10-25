@@ -14,7 +14,7 @@
 						"exec": [
 							"",
 							"",
-							"pm.test(\"should have status code of 200\", function () {",
+							"pm.test(\"should have status code of 200 \", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
