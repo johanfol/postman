@@ -49,7 +49,11 @@
           "protocol": "http",
           "host": ["gateway", "openfaas"],
           "port": "8080",
-          "path": ["off-channel-aggregation-decisioning-processor", "execute"]
+          "path": [
+            "function",
+            "off-channel-aggregation-decisioning-processor",
+            "execute"
+          ]
         }
       },
       "response": []
