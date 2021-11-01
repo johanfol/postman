@@ -45,7 +45,7 @@
           }
         },
         "url": {
-          "raw": "http://gateway.openfaas:8080/off-channel-aggregation-decisioning-processor/execute",
+          "raw": "http://gateway.openfaas:8080/function/off-channel-aggregation-decisioning-processor/execute",
           "protocol": "http",
           "host": ["gateway", "openfaas"],
           "port": "8080",
