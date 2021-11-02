@@ -138,8 +138,8 @@
               "     pm.expect(jsonData.result).to.include(\"{\\\"Channel\\\": 001@1.0, \\\"Result\\\":Incomplete},{\\\"Channel\\\": 002@1.0, \\\"Result\\\":Complete\");\r",
               "    pm.expect(jsonData.tadpReqBody.transaction).to.eql(jsonReq.transaction);\r",
               "    pm.expect(jsonData.tadpReqBody.ruleResults).to.eql(jsonReq.ruleResults);\r",
-              "    pm.expect(jsonData.tadpReqBody.typologyResult[0].result).to.eql(500);\r",
-              "    pm.expect(jsonData.tadpReqBody.typologyResult[1].result).to.eql(55);\r",
+              "    pm.expect(jsonData.tadpReqBody.typologyResult[0].result).to.eql(55);\r",
+              "    pm.expect(jsonData.tadpReqBody.typologyResult[1].result).to.eql(500);\r",
               "    pm.expect(jsonData.tadpReqBody.networkMap).to.eql(jsonReq.networkMap);\r",
               "});\r",
               ""
