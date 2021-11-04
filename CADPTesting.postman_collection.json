@@ -22,14 +22,8 @@
               "\r",
               "pm.test(\"Body matches string\", function () {\r",
               "     var jsonData = pm.response.json();\r",
-              "    var jsonReq = JSON.parse(pm.request.body);\r",
               "    pm.expect(jsonData.msg).to.include(\"2 channels initiated for transaction ID: b51ec534-ee48-4575-b6a9-ead2955b8069\");\r",
-              "    pm.expect(jsonData.result).to.include(\"{\\\"Channel\\\": 001@1.0, \\\"Result\\\":Complete},{\\\"Channel\\\": 002@1.0, \\\"Result\\\":Incomplete\");\r",
-              "    pm.expect(jsonData.tadpReqBody.transaction).to.eql(jsonReq.transaction);\r",
-              "    pm.expect(jsonData.tadpReqBody.ruleResults).to.eql(jsonReq.ruleResults);\r",
-              "    pm.expect(jsonData.tadpReqBody.typologyResult[0].result).to.eql(50);\r",
-              "    pm.expect(jsonData.tadpReqBody.typologyResult[1].result).to.eql(500);\r",
-              "    pm.expect(jsonData.tadpReqBody.networkMap).to.eql(jsonReq.networkMap);\r",
+              "    pm.expect(jsonData.result).to.include(\"{\\\"Channel\\\": 001@1.0, \\\"Result\\\":Incomplete},{\\\"Channel\\\": 002@1.0, \\\"Result\\\":Incomplete\");\r",
               "});\r",
               ""
             ],
@@ -50,10 +44,9 @@
           }
         },
         "url": {
-          "raw": "http://gateway.openfaas:8080/function/off-channel-aggregation-decisioning-processor/execute",
-          "protocol": "http",
-          "host": ["gateway", "openfaas"],
-          "port": "8080",
+          "raw": "https://frmfaas.sybrin.com/function/off-channel-aggregation-decisioning-processor/execute",
+          "protocol": "https",
+          "host": ["frmfaas", "sybrin", "com"],
           "path": [
             "function",
             "off-channel-aggregation-decisioning-processor",
@@ -80,9 +73,15 @@
               "\r",
               "pm.test(\"Body matches string\", function () {\r",
               "   var jsonData = pm.response.json();\r",
+              "        var jsonReq = JSON.parse(pm.request.body);\r",
+              "\r",
               "    pm.expect(jsonData.msg).to.include(\"2 channels initiated for transaction ID: b51ec534-ee48-4575-b6a9-ead2955b8069\");\r",
-              "     pm.expect(jsonData.result).to.include(\"{\\\"Channel\\\": 001@1.0, \\\"Result\\\":Incomplete},{\\\"Channel\\\": 002@1.0, \\\"Result\\\":Incomplete\");\r",
-              "     pm.expect(jsonData.tadpReqBody).to.eql(undefined);\r",
+              "     pm.expect(jsonData.result).to.include(\"{\\\"Channel\\\": 001@1.0, \\\"Result\\\":Complete},{\\\"Channel\\\": 002@1.0, \\\"Result\\\":Incomplete\");\r",
+              "     pm.expect(jsonData.tadpReqBody.transaction).to.eql(jsonReq.transaction);\r",
+              "    pm.expect(jsonData.tadpReqBody.ruleResults).to.eql(jsonReq.ruleResults);\r",
+              "    pm.expect(jsonData.tadpReqBody.typologyResult[0].result).to.eql(50);\r",
+              "    pm.expect(jsonData.tadpReqBody.typologyResult[1].result).to.eql(500);\r",
+              "    pm.expect(jsonData.tadpReqBody.networkMap).to.eql(jsonReq.networkMap);\r",
               "});\r",
               ""
             ],
@@ -103,10 +102,9 @@
           }
         },
         "url": {
-          "raw": "http://gateway.openfaas:8080/function/off-channel-aggregation-decisioning-processor/execute",
-          "protocol": "http",
-          "host": ["gateway", "openfaas"],
-          "port": "8080",
+          "raw": "https://frmfaas.sybrin.com/function/off-channel-aggregation-decisioning-processor/execute",
+          "protocol": "https",
+          "host": ["frmfaas", "sybrin", "com"],
           "path": [
             "function",
             "off-channel-aggregation-decisioning-processor",
@@ -156,10 +154,9 @@
           }
         },
         "url": {
-          "raw": "http://gateway.openfaas:8080/function/off-channel-aggregation-decisioning-processor/execute",
-          "protocol": "http",
-          "host": ["gateway", "openfaas"],
-          "port": "8080",
+          "raw": "https://frmfaas.sybrin.com/function/off-channel-aggregation-decisioning-processor/execute",
+          "protocol": "https",
+          "host": ["frmfaas", "sybrin", "com"],
           "path": [
             "function",
             "off-channel-aggregation-decisioning-processor",
@@ -216,10 +213,9 @@
           }
         },
         "url": {
-          "raw": "http://gateway.openfaas:8080/function/off-channel-aggregation-decisioning-processor/execute",
-          "protocol": "http",
-          "host": ["gateway", "openfaas"],
-          "port": "8080",
+          "raw": "https://frmfaas.sybrin.com/function/off-channel-aggregation-decisioning-processor/execute",
+          "protocol": "https",
+          "host": ["frmfaas", "sybrin", "com"],
           "path": [
             "function",
             "off-channel-aggregation-decisioning-processor",
