@@ -93,7 +93,7 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"should have status of None\", function () {",
+							"pm.test(\"should have status of Review\", function () {",
 							"    pm.expect(jsonData.result[0].Result.status).to.equal('Review');",
 							"});",
 							""
