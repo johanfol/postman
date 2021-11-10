@@ -359,11 +359,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}function/off-channel-router-setup-processor/execute",
+					"raw": "{{url}}/function/off-channel-router-setup-processor/execute",
 					"host": [
-						"{{url}}function"
+						"{{url}}"
 					],
 					"path": [
+						"function",
 						"off-channel-router-setup-processor",
 						"execute"
 					]
