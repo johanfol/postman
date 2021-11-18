@@ -704,24 +704,7 @@
           ],
           "request": {
             "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "password",
-                  "value": "",
-                  "type": "string"
-                },
-                {
-                  "key": "username",
-                  "value": "",
-                  "type": "string"
-                },
-                {
-                  "key": "showPassword",
-                  "value": false,
-                  "type": "boolean"
-                }
-              ]
+              "type": "noauth"
             },
             "method": "POST",
             "header": [],
@@ -803,24 +786,7 @@
           ],
           "request": {
             "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "password",
-                  "value": "",
-                  "type": "string"
-                },
-                {
-                  "key": "username",
-                  "value": "",
-                  "type": "string"
-                },
-                {
-                  "key": "showPassword",
-                  "value": false,
-                  "type": "boolean"
-                }
-              ]
+              "type": "noauth"
             },
             "method": "POST",
             "header": [],
