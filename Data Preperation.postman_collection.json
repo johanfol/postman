@@ -648,10 +648,10 @@
               }
             },
             "url": {
-              "raw": "https://frm.sybrin.com/nifiHost",
-              "protocol": "https",
-              "host": ["frm", "sybrin", "com"],
-              "path": ["nifiHost"]
+              "raw": "http://nifi.development:8081",
+              "protocol": "http",
+              "host": ["nifi", "development"],
+              "port": "8081"
             }
           },
           "response": []
