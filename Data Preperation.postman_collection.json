@@ -307,7 +307,6 @@
 									"        })\r",
 									"    }\r",
 									"}, function (err, res) {\r",
-									"    console.log(err, res)\r",
 									"    pm.test(`Check if creditor pseudonym exists`, function () {\r",
 									"        if (err)\r",
 									"            pm.expect('Not an error').to.eq('An error occurred')\r",
