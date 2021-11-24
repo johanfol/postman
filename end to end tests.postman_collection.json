@@ -109,19 +109,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -191,6 +179,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -253,19 +244,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -397,19 +376,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -541,19 +508,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -689,19 +644,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -832,19 +775,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -975,19 +906,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -1118,19 +1037,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -1297,19 +1204,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "$!prAtHe>Qh5X9D3",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "root",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
