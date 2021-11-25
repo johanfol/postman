@@ -83,8 +83,9 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
-									"console.log(\"Bearer to set \",pm.globals.get(\"arangoToken\"))\r",
+									"\r",
+									"var Header = require('postman-collection').Header;  \r",
+									"pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
 									"\r",
 									"\r",
 									"printHeaders(pm.request.headers); // before shows 2\r",
@@ -237,8 +238,9 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
-									"console.log(\"Bearer to set \",pm.globals.get(\"arangoToken\"))\r",
+									"\r",
+									"var Header = require('postman-collection').Header;  \r",
+									"pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
 									"\r",
 									"\r",
 									"printHeaders(pm.request.headers); // before shows 2\r",
@@ -388,8 +390,9 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
-									"console.log(\"Bearer to set \",pm.globals.get(\"arangoToken\"))\r",
+									"\r",
+									"var Header = require('postman-collection').Header;  \r",
+									"pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
 									"\r",
 									"\r",
 									"printHeaders(pm.request.headers); // before shows 2\r",
@@ -539,8 +542,9 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
-									"console.log(\"Bearer to set \",pm.globals.get(\"arangoToken\"))\r",
+									"\r",
+									"var Header = require('postman-collection').Header;  \r",
+									"pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
 									"\r",
 									"\r",
 									"printHeaders(pm.request.headers); // before shows 2\r",
