@@ -82,9 +82,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									" \r",
-									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
-									""
+									"\r",
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
 								],
 								"type": "text/javascript"
 							}
@@ -116,10 +115,9 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "",
+								"key": "Bearer",
 								"value": "",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							}
 						],
 						"body": {
@@ -226,9 +224,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									" \r",
-									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
-									""
+									"\r",
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
 								],
 								"type": "text/javascript"
 							}
@@ -260,10 +257,9 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "",
+								"key": "Bearer",
 								"value": "",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							}
 						],
 						"body": {
@@ -367,9 +363,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									" \r",
-									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
-									""
+									"\r",
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
 								],
 								"type": "text/javascript"
 							}
@@ -399,7 +394,13 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Bearer",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
@@ -501,9 +502,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									" \r",
-									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
-									""
+									"\r",
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
 								],
 								"type": "text/javascript"
 							}
@@ -533,7 +533,13 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Bearer",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
