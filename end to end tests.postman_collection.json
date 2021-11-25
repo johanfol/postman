@@ -82,8 +82,9 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
-									" "
+									" \r",
+									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -113,7 +114,14 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
@@ -218,8 +226,9 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
-									" "
+									" \r",
+									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -249,7 +258,14 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
@@ -351,8 +367,9 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
-									" "
+									" \r",
+									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -484,8 +501,9 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
-									" "
+									" \r",
+									" pm.request.headers.append(Header.create('Bearer', pm.globals.get(\"arangoToken\")));\r",
+									""
 								],
 								"type": "text/javascript"
 							}
