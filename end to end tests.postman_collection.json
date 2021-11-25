@@ -126,13 +126,7 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Bearer",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
@@ -281,13 +275,7 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Bearer",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
@@ -433,13 +421,7 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Bearer",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
@@ -585,13 +567,7 @@
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Bearer",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}",
