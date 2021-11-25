@@ -83,7 +83,17 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
+									"\r",
+									"printHeaders(pm.request.headers); // before shows 2\r",
+									"\r",
+									"\r",
+									"function printHeaders(headers) { // print out headers to the console\r",
+									"    console.log('-------pm.request.headers-------')\r",
+									"    headers.each(function(header) {\r",
+									"       console.log(header.key + ': ' + header.value);\r",
+									"    });\r",
+									"}"
 								],
 								"type": "text/javascript"
 							}
@@ -225,7 +235,17 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
+									"\r",
+									"printHeaders(pm.request.headers); // before shows 2\r",
+									"\r",
+									"\r",
+									"function printHeaders(headers) { // print out headers to the console\r",
+									"    console.log('-------pm.request.headers-------')\r",
+									"    headers.each(function(header) {\r",
+									"       console.log(header.key + ': ' + header.value);\r",
+									"    });\r",
+									"}"
 								],
 								"type": "text/javascript"
 							}
@@ -364,7 +384,17 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
+									"\r",
+									"printHeaders(pm.request.headers); // before shows 2\r",
+									"\r",
+									"\r",
+									"function printHeaders(headers) { // print out headers to the console\r",
+									"    console.log('-------pm.request.headers-------')\r",
+									"    headers.each(function(header) {\r",
+									"       console.log(header.key + ': ' + header.value);\r",
+									"    });\r",
+									"}"
 								],
 								"type": "text/javascript"
 							}
@@ -503,7 +533,17 @@
 							"script": {
 								"exec": [
 									"\r",
-									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  "
+									"request.headers['Bearer'] = pm.globals.get(\"arangoToken\");  \r",
+									"\r",
+									"printHeaders(pm.request.headers); // before shows 2\r",
+									"\r",
+									"\r",
+									"function printHeaders(headers) { // print out headers to the console\r",
+									"    console.log('-------pm.request.headers-------')\r",
+									"    headers.each(function(header) {\r",
+									"       console.log(header.key + ': ' + header.value);\r",
+									"    });\r",
+									"}"
 								],
 								"type": "text/javascript"
 							}
