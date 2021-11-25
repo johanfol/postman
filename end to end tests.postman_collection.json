@@ -82,7 +82,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
+									" "
 								],
 								"type": "text/javascript"
 							}
@@ -217,7 +218,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
+									" "
 								],
 								"type": "text/javascript"
 							}
@@ -349,7 +351,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
+									" "
 								],
 								"type": "text/javascript"
 							}
@@ -481,7 +484,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
+									" "
 								],
 								"type": "text/javascript"
 							}
@@ -617,6 +621,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
 									" "
 								],
 								"type": "text/javascript"
@@ -748,6 +753,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
 									" "
 								],
 								"type": "text/javascript"
@@ -879,6 +885,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
 									" "
 								],
 								"type": "text/javascript"
@@ -1010,6 +1017,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"pm.request.headers.add(new Header(\"Bearer: \" +pm.globals.get(\"arangoToken\")))\r",
 									" "
 								],
 								"type": "text/javascript"
