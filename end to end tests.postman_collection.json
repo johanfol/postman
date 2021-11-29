@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "5a683a32-3cf2-424b-ae82-1a5ded67f0ff",
-		"name": "end to end tests offline",
+		"name": "end to end tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -88,15 +88,15 @@
 									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));\r",
 									"\r",
 									"\r",
-									"printHeaders(pm.request.headers); // before shows 2\r",
+									"//printHeaders(pm.request.headers); // before shows 2\r",
 									"\r",
 									"\r",
-									"function printHeaders(headers) { // print out headers to the console\r",
-									"    console.log('-------pm.request.headers-------')\r",
-									"    headers.each(function (header) {\r",
-									"        console.log(header.key + ': ' + header.value);\r",
-									"    });\r",
-									"}"
+									"// function printHeaders(headers) { // print out headers to the console\r",
+									"//     console.log('-------pm.request.headers-------')\r",
+									"//     headers.each(function (header) {\r",
+									"//         console.log(header.key + ': ' + header.value);\r",
+									"//     });\r",
+									"// }"
 								],
 								"type": "text/javascript"
 							}
@@ -236,16 +236,7 @@
 									"var Header = require('postman-collection').Header;\r",
 									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));\r",
 									"\r",
-									"\r",
-									"printHeaders(pm.request.headers); // before shows 2\r",
-									"\r",
-									"\r",
-									"function printHeaders(headers) { // print out headers to the console\r",
-									"    console.log('-------pm.request.headers-------')\r",
-									"    headers.each(function (header) {\r",
-									"        console.log(header.key + ': ' + header.value);\r",
-									"    });\r",
-									"}"
+									" "
 								],
 								"type": "text/javascript"
 							}
@@ -381,17 +372,7 @@
 									"\r",
 									"var Header = require('postman-collection').Header;\r",
 									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));\r",
-									"\r",
-									"\r",
-									"printHeaders(pm.request.headers); // before shows 2\r",
-									"\r",
-									"\r",
-									"function printHeaders(headers) { // print out headers to the console\r",
-									"    console.log('-------pm.request.headers-------')\r",
-									"    headers.each(function (header) {\r",
-									"        console.log(header.key + ': ' + header.value);\r",
-									"    });\r",
-									"}"
+									" "
 								],
 								"type": "text/javascript"
 							}
@@ -527,17 +508,7 @@
 									"\r",
 									"var Header = require('postman-collection').Header;\r",
 									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));\r",
-									"\r",
-									"\r",
-									"printHeaders(pm.request.headers); // before shows 2\r",
-									"\r",
-									"\r",
-									"function printHeaders(headers) { // print out headers to the console\r",
-									"    console.log('-------pm.request.headers-------')\r",
-									"    headers.each(function (header) {\r",
-									"        console.log(header.key + ': ' + header.value);\r",
-									"    });\r",
-									"}"
+									" "
 								],
 								"type": "text/javascript"
 							}
