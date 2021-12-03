@@ -75,11 +75,11 @@
 							"});",
 							"",
 							"pm.test(\"should have rule result of false\", function () {",
-							"    pm.expect(jsonData.ruleResult.result).to.be.eql(false);",
+							"    pm.expect(jsonData.ruleResult.result).to.be.eql(true);",
 							"});",
 							"",
 							"pm.test(\"should have rule result with insufficient history reason\", function () {",
-							"    pm.expect(jsonData.ruleResult.reason).to.be.eql('Insufficient transaction history');",
+							"    pm.expect(jsonData.ruleResult.reason).to.be.eql('Exceptionally large outgoing transfer detected');",
 							"});"
 						],
 						"type": "text/javascript"
