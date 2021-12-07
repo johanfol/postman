@@ -818,7 +818,7 @@
 							"",
 							"pm.test(\"Remove Seed Data from DB\", function () {",
 							"    pm.sendRequest({",
-							"        url: 'https://frmarango.sybrin.com/_db/transactionHistory/_api/cursor',",
+							"        url: 'http://arango.development:8529/_db/transactionHistory/_api/cursor',",
 							"        method: 'POST',",
 							"        header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },",
 							"        body: {",
