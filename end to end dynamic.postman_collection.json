@@ -28,8 +28,11 @@
 									"}\r",
 									"//pain001/003pain001.json\"\r",
 									"console.log(filestring)\r",
+									"\r",
 									"let requestz = pm.sendRequest({\r",
-									"    url: \"https://frmjenkins.sybrin.com/job/Testing/job/End_to_end_from_tms/ws/data/dataExport/\" + filestring,\r",
+									"    // url: \"https://frmjenkins.sybrin.com/job/Testing/job/End_to_end_from_tms/ws/data/dataExport/\" + filestring,\r",
+									"     url: \"./\" + filestring,\r",
+									"    \r",
 									"    method: \"GET\",\r",
 									"    header: {\r",
 									"        \"Content-Type\": \"application/x-www-form-urlencoded\"\r",
@@ -69,7 +72,13 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "default"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{{resBody}}",
@@ -140,6 +149,7 @@
 									" \r",
 									"pm.test(\"check that there is actual data received back \", function () {\r",
 									"    pm.expect(jsonData.result).to.not.eql([]);\r",
+									"    \r",
 									"});"
 								],
 								"type": "text/javascript"
