@@ -32,7 +32,7 @@
 									"//pain001/003pain001.json\"\r",
 									"console.log('file to get', filestring)\r",
 									"let requestz = pm.sendRequest({\r",
-									"    url: \"https://github.com/ActioFRM/postman/blob/main/CADPTesting.postman_collection.json\" ,\r",
+									"    url: \"https://raw.githubusercontent.com/ActioFRM/postman/main/CADPTesting.postman_collection.json\" ,\r",
 									"    method: \"GET\",\r",
 									"    header: {\r",
 									"        \"Content-Type\": \"application/x-www-form-urlencoded\"\r",
