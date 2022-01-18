@@ -29,7 +29,7 @@
 									"//pain001/003pain001.json\"\r",
 									"console.log('file to get', filestring)  \r",
 									"let requestz = pm.sendRequest({\r",
-									"    url: \"file:///\" + filestring, \r",
+									"    url: \"file:///bitnami/jenkins/home/workspace/Testing/End_to_end_from_tms/data/dataExport/\" + filestring, \r",
 									"    method: \"GET\",\r",
 									"    header: {\r",
 									"        \"Content-Type\": \"application/x-www-form-urlencoded\"\r",
