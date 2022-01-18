@@ -32,7 +32,7 @@
 									"    .then(response => response.text())\r",
 									"    .then(data => {\r",
 									"        // Do something with your data\r",
-									"        console.log(data);\r",
+									"        console.log('here is data response', data);\r",
 									"    });\r",
 									"\r",
 									"\r",
