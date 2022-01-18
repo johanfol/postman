@@ -81,7 +81,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{{resBody}}",
+							"raw": "{{pain001/001pain001.json}}",
 							"options": {
 								"raw": {
 									"language": "json"
