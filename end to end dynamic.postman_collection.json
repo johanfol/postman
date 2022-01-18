@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "9d17226b-2d3f-4848-ae87-669e792256dc",
+		"name": "end to end dynamic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pain 001",
+			"item": [
+				{
+					"name": "transaction 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"let random = Math.floor(Math.random() * 500)\r",
+									"let filestring = ''\r",
+									"\r",
+									"filestring = 'directory/' + '00' + random + 'pain001.json'\r",
+									"if (random > 9) {\r",
+									"    filestring = 'directory/' + '0' + random + 'pain001.json'\r",
+									"}\r",
+									"if (random > 99) {\r",
+									"    filestring = 'directory/' + '' + random + 'pain001.json'\r",
+									"}\r",
+									"//pain001/003pain001.json\"\r",
+									"console.log(filestring)\r",
+									"let requestz = pm.sendRequest({\r",
+									"    url: \"https://frmjenkins.sybrin.com/job/Testing/job/End_to_end_from_tms/ws/data/dataExport/\" + filestring,\r",
+									"    method: \"GET\",\r",
+									"    header: {\r",
+									"        \"Content-Type\": \"application/x-www-form-urlencoded\"\r",
+									"    },\r",
+									"    body: {}\r",
+									"}, function (err, res) {\r",
+									"    let resBody = new Buffer.from(res.stream).toString()\r",
+									"    postman.setEnvironmentVariable(\"resBody\", JSON.stringify(resBody));\r",
+									"    console.log(resBody)\r",
+									"    console.err(err)\r",
+									"})\r",
+									"\r",
+									"var req = JSON.parse(request.data);\r",
+									"let e2eID = JSON.stringify(req.CstmrCdtTrfInitn.GrpHdr.MsgId);\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
+									"\r",
+									"pm.collectionVariables.set(\"EndToEndId\", e2eID);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{resBody}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://gateway.openfaas:8080/function/off-transaction-monitoring-service/execute",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"openfaas"
+							],
+							"port": "8080",
+							"path": [
+								"function",
+								"off-transaction-monitoring-service",
+								"execute"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Arango db check transaction 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//TODO \r",
+									"//\r",
+									"//get dynamic network map \r",
+									"//check rules and typologies results \r",
+									"\r",
+									"var Header = require('postman-collection').Header;\r",
+									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));\r",
+									"\r",
+									"\r",
+									"//printHeaders(pm.request.headers); // before shows 2\r",
+									"\r",
+									"\r",
+									"// function printHeaders(headers) { // print out headers to the console\r",
+									"//     console.log('-------pm.request.headers-------')\r",
+									"//     headers.each(function (header) {\r",
+									"//         console.log(header.key + ': ' + header.value);\r",
+									"//     });\r",
+									"// }"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var req = JSON.parse(request.data);\r",
+									"// TODO \r",
+									"// \r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									" \r",
+									"pm.test(\"check that there is actual data received back \", function () {\r",
+									"    pm.expect(jsonData.result).to.not.eql([]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId ==  {{EndToEndId}} return transaction \"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arango.development:8529/_db/transactionHistory/_api/cursor",
+							"protocol": "http",
+							"host": [
+								"arango",
+								"development"
+							],
+							"port": "8529",
+							"path": [
+								"_db",
+								"transactionHistory",
+								"_api",
+								"cursor"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
