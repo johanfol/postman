@@ -27,7 +27,7 @@
 									"    filestring = 'pain001/' + '' + random + 'pain001.json'\r",
 									"}\r",
 									"\r",
-									"console.log(JSON.stringify(pm.variables))\r",
+									"console.log(JSON.stringify(pm.variables.get('-d')))\r",
 									"\r",
 									"//pain001/003pain001.json\"\r",
 									"console.log('file to get', filestring)\r",
