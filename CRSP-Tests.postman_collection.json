@@ -410,8 +410,9 @@
 							"    }",
 							"})",
 							"",
-							"pm.test(\"should not send the new version of the network sub-map\", function () {",
-							"    pm.expect(jsonData.networkMap.cfg).to.eql('2.1.0');",
+							"pm.test(\"should send the correct network sub-map\", function () {",
+							"    const networkMap = pm.environment.get(\"networkMapPacs002\");",
+							"    pm.expect(jsonData.networkMap).to.eql(JSON.parse(networkMap));",
 							"})",
 							""
 						],
@@ -603,7 +604,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"setTimeout(checkStatusCode, 6000);",
+							"setTimeout(checkStatusCode, 5000);",
 							"",
 							"    function checkStatusCode() {",
 							"",
