@@ -172,6 +172,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"check that there is actual data received back \", function () {\r",
+									"    console.log(jsonData)\r",
 									"    pm.expect(jsonData.result).to.not.eql([]);\r",
 									"    pm.expect(jsonData.result[0].networkMap.cfg).to.eql('1.0.0');\r",
 									"});"
@@ -610,6 +611,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"check that there is actual data received back \", function () {\r",
+									"        console.log(jsonData)\r",
 									"    pm.expect(jsonData.result).to.not.eql([]);\r",
 									"    pm.expect(jsonData.result[0].networkMap.cfg).to.eql('2.0.0');\r",
 									"});"
