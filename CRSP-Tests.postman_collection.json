@@ -82,7 +82,11 @@
 									"}\r",
 									"]\r",
 									"\r",
-									"pm.sendRequest({\r",
+									"setTimeout(checkStatusCode, 2000);\r",
+									"\r",
+									"    function checkStatusCode() {\r",
+									"\r",
+									"       pm.sendRequest({\r",
 									"    url: 'http://arango.development:8529/_db/networkmap/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
@@ -95,6 +99,8 @@
 									"        })\r",
 									"    }\r",
 									"});\r",
+									"    }\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -513,7 +519,11 @@
 									"}\r",
 									"]\r",
 									"\r",
-									"pm.sendRequest({\r",
+									"setTimeout(checkStatusCode, 2000);\r",
+									"\r",
+									"    function checkStatusCode() {\r",
+									"\r",
+									"       pm.sendRequest({\r",
 									"    url: 'http://arango.development:8529/_db/networkmap/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
@@ -526,7 +536,7 @@
 									"        })\r",
 									"    }\r",
 									"});\r",
-									"\r",
+									"    }\r",
 									""
 								],
 								"type": "text/javascript"
