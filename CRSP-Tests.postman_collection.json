@@ -154,8 +154,19 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"setTimeout(checkStatusCode, 5000);\r",
+									"\r",
+									"    function checkStatusCode() {\r",
+									"\r",
+									"        pm.sendRequest('https://postman-echo.com/get', function (err, res) {\r",
+									"\r",
+									"            tests['status code should be 200']= res.code ===200;\r",
+									"\r",
+									"        });\r",
+									"    }\r",
 									"var Header = require('postman-collection').Header;\r",
-									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));"
+									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -172,7 +183,6 @@
 									"});\r",
 									"\r",
 									"pm.test(\"check that there is actual data received back \", function () {\r",
-									"    console.log(jsonData)\r",
 									"    pm.expect(jsonData.result).to.not.eql([]);\r",
 									"    pm.expect(jsonData.result[0].networkMap.cfg).to.eql('1.0.0');\r",
 									"});"
@@ -455,6 +465,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"\r",
 									"var uuid = require('uuid');\r",
 									"var myUUID = uuid.v4();\r",
 									"pm.collectionVariables.set(\"transactionID\", myUUID.slice(-32));\r",
@@ -580,6 +591,16 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"setTimeout(checkStatusCode, 5000);\r",
+									"\r",
+									"    function checkStatusCode() {\r",
+									"\r",
+									"        pm.sendRequest('https://postman-echo.com/get', function (err, res) {\r",
+									"\r",
+									"            tests['status code should be 200']= res.code ===200;\r",
+									"\r",
+									"        });\r",
+									"    }\r",
 									"var Header = require('postman-collection').Header;\r",
 									"pm.request.headers.append(Header.create(`Bearer ${pm.globals.get(\"arangoToken\")}`, 'Authorization'));\r",
 									"console.log(\"received end to end id for above request \",pm.collectionVariables.get(\"EndToEndId\")); \r",
@@ -611,7 +632,6 @@
 									"});\r",
 									"\r",
 									"pm.test(\"check that there is actual data received back \", function () {\r",
-									"        console.log(jsonData)\r",
 									"    pm.expect(jsonData.result).to.not.eql([]);\r",
 									"    pm.expect(jsonData.result[0].networkMap.cfg).to.eql('2.0.0');\r",
 									"});"
