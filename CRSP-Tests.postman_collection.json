@@ -35,7 +35,9 @@
 									"    }\r",
 									"});\r",
 									"\r",
-									"let e2eID = msgId;\r",
+									"let e2eID = JSON.stringify(msgId);\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
 									"pm.collectionVariables.set(\"EndToEndId\", e2eID);\r",
 									"\r",
 									"const networkMaps = [\r",
@@ -180,7 +182,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId == {{EndToEndId}} return transaction \"\r\n}",
+							"raw": "{\r\n    \"query\": \"for transaction In transactions FILTER transaction.transaction.CstmrCdtTrfInitn.GrpHdr.MsgId == {{EndToEndId}} return transaction \"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -289,11 +291,10 @@
 									"    }\r",
 									"});\r",
 									"\r",
-									"let e2eID = msgId;\r",
-									"\r",
+									"let e2eID = JSON.stringify(msgId);\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
 									"pm.collectionVariables.set(\"EndToEndId\", e2eID);\r",
-									"\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -467,8 +468,9 @@
 									"    }\r",
 									"});\r",
 									"\r",
-									"let e2eID = msgId;\r",
-									"\r",
+									"let e2eID = JSON.stringify(msgId);\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
 									"pm.collectionVariables.set(\"EndToEndId\", e2eID);\r",
 									"\r",
 									"const networkMaps = [\r",
@@ -657,8 +659,9 @@
 									"\r",
 									"const msgId = pm.collectionVariables.get(\"transactionID\");\r",
 									"\r",
-									"let e2eID = msgId;\r",
-									"\r",
+									"let e2eID = JSON.stringify(msgId);\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
+									"e2eID = e2eID.replace(\"\\\"\", \"'\")\r",
 									"pm.collectionVariables.set(\"EndToEndId\", e2eID);\r",
 									""
 								],
