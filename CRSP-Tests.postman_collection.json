@@ -166,10 +166,9 @@
 									"});\r",
 									"\r",
 									"pm.test(\"check that there is actual data received back \", function () {\r",
-									"    const networkMap = pm.environment.get(\"e2eNetworkMapPain001\");\r",
 									"    pm.expect(jsonData.result).to.not.eql([]);\r",
 									"    pm.expect(jsonData.result[0].networkMap).to.eql(JSON.parse(networkMap));\r",
-									"\r",
+									"    pm.expect(jsonData.networkMap.cfg).to.eql('1.0.0');\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -307,8 +306,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"console.log(pm.response, 'vvhkjfbkjgjhndflkgjdklfj')\r",
-									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});"
@@ -607,8 +604,7 @@
 									"\r",
 									"pm.test(\"check that there is actual data received back \", function () {\r",
 									"    pm.expect(jsonData.result).to.not.eql([]);\r",
-									"     const networkMap = pm.environment.get(\"e2eNetworkMapPacs002\");\r",
-									"    pm.expect(jsonData.result[0].networkMap).to.eql(JSON.parse(networkMap));\r",
+									"    pm.expect(jsonData.networkMap.cfg).to.eql('2.0.0');\r",
 									"});"
 								],
 								"type": "text/javascript"
