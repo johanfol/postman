@@ -69,7 +69,7 @@
 									"\r",
 									"const ruleConfig = [\r",
 									"    {\r",
-									"    \"id\": \"045@1.0.0\",\r",
+									"    \"id\": \"044@1.0.0\",\r",
 									"    \"cfg\": \"1.0.0\",\r",
 									"    \"config\": {\r",
 									"        \"bands\": [\r",
@@ -96,12 +96,12 @@
 									"pm.collectionVariables.set(\"EndToEndId\", e2eID);\r",
 									"\r",
 									"const networkMaps = [\r",
-									"{   \"key\": \"045\",\r",
+									"{   \"key\": \"044\",\r",
 									"    \"active\":true,\r",
 									"    \"cfg\": \"1.0.0\",\r",
 									"    \"messages\": [\r",
 									"      {\r",
-									"            \"id\": \"004_045@1.0.0\",\r",
+									"            \"id\": \"004_044@1.0.0\",\r",
 									"            \"host\": \"http://gateway.openfaas:8080/function/off-transaction-aggregation-decisioning-processor-rel-1-0-0\",\r",
 									"            \"cfg\": \"1.0.0\",\r",
 									"            \"txTp\": \"pacs.002.001.12\",\r",
@@ -112,13 +112,13 @@
 									"                    \"cfg\": \"1.0.0\",\r",
 									"                    \"typologies\": [\r",
 									"                        {\r",
-									"                            \"id\": \"999_045@1.0.0\",\r",
+									"                            \"id\": \"999_044@1.0.0\",\r",
 									"                            \"host\": \"http://gateway.openfaas:8080/function/off-typology-processor-rel-1-0-0\",\r",
 									"                            \"cfg\": \"1.0.0\",\r",
 									"                            \"rules\": [\r",
 									"                                {\r",
-									"                                    \"id\": \"045@1.0.0\",\r",
-									"                                    \"host\": \"http://gateway.openfaas:8080/function/off-rule-045-rel-1-0-0\",\r",
+									"                                    \"id\": \"044@1.0.0\",\r",
+									"                                    \"host\": \"http://gateway.openfaas:8080/function/off-rule-044-rel-1-0-0\",\r",
 									"                                    \"cfg\": \"1.0.0\"\r",
 									"                                }\r",
 									"                            ]\r",
@@ -941,6 +941,16 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "transactionID",
+			"value": ""
+		},
+		{
+			"key": "EndToEndId",
+			"value": ""
 		}
 	]
 }
