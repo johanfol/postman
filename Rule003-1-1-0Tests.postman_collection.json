@@ -241,10 +241,12 @@
 						},
 						"url": {
 							"raw": "http://arango.development:8529/_db/transactionHistory/_api/cursor",
+							"protocol": "http",
 							"host": [
 								"arango",
 								"development"
 							],
+							"port": "8529",
 							"path": [
 								"_db",
 								"transactionHistory",
