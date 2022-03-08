@@ -73,7 +73,7 @@
 									"\r",
 									"const networkMaps = [\r",
 									"{\r",
-									"       \"key\": \"004\",\r",
+									"       \"key\": \"003\",\r",
 									"       \"active\":true,\r",
 									"        \"cfg\": \"2.0.0\",\r",
 									"        \"messages\": [\r",
