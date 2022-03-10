@@ -1486,6 +1486,7 @@
 								"exec": [
 									"const responseJson = pm.response.json();\r",
 									"var req = JSON.parse(request.data);\r",
+									"console.log(responseJson)\r",
 									"\r",
 									"pm.test(`should have pacs002 transaction written to transactionHistory`, function () {\r",
 									"    pm.sendRequest({\r",
