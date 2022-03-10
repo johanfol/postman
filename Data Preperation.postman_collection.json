@@ -52,17 +52,13 @@
 							}
 						},
 						"url": {
-							"raw": "https://frm.sybrin.com/nifi/",
-							"protocol": "https",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"frm",
-								"sybrin",
-								"com"
-							],
-							"path": [
 								"nifi",
-								""
-							]
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
