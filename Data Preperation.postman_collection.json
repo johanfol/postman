@@ -1485,7 +1485,7 @@
 							"script": {
 								"exec": [
 									"const responseJson = pm.response.json();\r",
-									"var req = JSON.parse(pm.request.raw);\r",
+									"var req = JSON.parse(pm.request.body.raw);\r",
 									"console.log(req)\r",
 									"\r",
 									"pm.test(`should have pacs002 transaction written to transactionHistory`, function () {\r",
