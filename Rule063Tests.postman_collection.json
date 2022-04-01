@@ -1025,7 +1025,6 @@
 							"}",
 							"pm.collectionVariables.set(\"msgIds\", pacs008MsgIds);",
 							"",
-							" console.log(duplicatedPacs008,'aaaaa')",
 							"pm.sendRequest({",
 							"    url: `${arangourl}/_db/pseudonyms/_api/cursor`,",
 							"    method: 'POST',",
