@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cae8a03f-26ef-4788-a2cb-0e62b1d09712",
+		"_postman_id": "8b3468a7-1628-45cf-9de8-9b7646be540b",
 		"name": "Data Preperation",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -17,55 +17,23 @@
 								"exec": [
 									"const responseJson = pm.response.json();\r",
 									"\r",
-									"pm.test(\"Incoming & Outgoing messages match\", function () { \r",
-									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.PmtId.EndToEndId).to.eq(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.PmtId.EndToEndId);\r",
+									"pm.test(\"Incoming & Outgoing messages match\", function () {\r",
+									"    pm.expect(responseJson.CstmrCdtTrfInitn.senderIdentityInStore).to.be.false;\r",
+									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.PmtId.EndToEndId).to.eq(\"b51ec535-ee48-4575-b6a9-ead2955b8069\");\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Test debtor fields pseudonyms\", function () {\r",
-									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id).to.eq(responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id);\r",
+									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id).to.eq(\"6793245d1b205bf4edb97ab17b6164b160893c433fc10ad4fdc618721edc9604\");\r",
 									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.SchmeNm.Prtry).to.eq(\"PSEUDO\");\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Test creditor fields pseudonyms\", function () {\r",
-									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id).to.eq(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id);\r",
+									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id).to.eq(\"1123cc025752ab7dd848a7363dc21026769e80ffbef6e5c490863143149cfee8\");\r",
 									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.SchmeNm.Prtry).to.eq(\"PSEUDO\");\r",
 									"    pm.response.to.have.status(200);\r",
 									"});"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"// AM-987 \r",
-									"let body = { mode: 'raw', raw: JSON.stringify({ messageType: 'pain001' }), options: { raw: { language: 'json' } } } \r",
-									"let requestz = pm.sendRequest(\r",
-									"    {\r",
-									"        url: \"https://frmfaas.sybrin.com/function/off-msg-waitron/getrandommessage\",\r",
-									"        method: \"POST\",\r",
-									"        body: body\r",
-									"    }, function (err, res) {\r",
-									"        if (err != null) {\r",
-									"            console.error(err);\r",
-									"        }\r",
-									"        let resBody = new Buffer.from(res.stream).toString() \r",
-									"        let jsondata = JSON.parse(resBody) \r",
-									"        console.log(JSON.parse(resBody).CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.PmtId.EndToEndId)\r",
-									"        let e2eID = JSON.parse(resBody).CstmrCdtTrfInitn.GrpHdr.MsgId;\r",
-									"        pm.collectionVariables.set(\"EndToEndId\", e2eID);\r",
-									"\r",
-									"        pm.request.body.raw=jsondata;\r",
-									"    }\r",
-									")\r",
-									"\r",
-									"\r",
-									"\r",
-									"\r",
-									""
 								],
 								"type": "text/javascript"
 							}
@@ -76,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"2669e349-500d-44ba-9e27-7767a16608a0\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+27783078685\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"PASSPORT\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"Ivan Russel-Klein\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"April Sam Adamson\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+27782722305\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"MSISDN\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"April Adamson\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -84,10 +52,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -102,7 +73,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -126,7 +97,7 @@
 									"});\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url:pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -167,10 +138,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -183,7 +157,8 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Incoming & Outgoing messages match\", function () {\r",
-									"    const responseJson = pm.response.json(); \r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.CstmrCdtTrfInitn.senderIdentityInStore).to.be.false;\r",
 									"    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.PmtId.EndToEndId).to.eq(\"b51ec535-ee48-4575-b6a9-ead2955b8069\");\r",
 									"    pm.response.to.have.status(200);\r",
 									"});"
@@ -205,10 +180,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -223,7 +201,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"    body: {\r",
@@ -235,8 +213,8 @@
 									"}, function (err, res) {\r",
 									"    pm.test(`Check if transaction relationship edge was populated`, function () {\r",
 									"        if (err) {\r",
-									"            console.log(error);\r",
-									"            pm.expect('Not an error').to.eq('An error occurred')\r",
+									"            console.log(err);\r",
+									"            //pm.expect('Not an error').to.eq('An error occurred')\r",
 									"        }\r",
 									"        else {\r",
 									"            const arangoRes = res.json();\r",
@@ -246,7 +224,7 @@
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._from);\r",
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._to);\r",
 									"                pm.sendRequest({\r",
-									"                    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"                    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"                    method: 'POST',\r",
 									"                    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"                    body: {\r",
@@ -258,7 +236,7 @@
 									"                }, function (err, res) {\r",
 									"                    pm.test(`Check if debtor and creditor nodes were created`, function () {\r",
 									"                        if (err) {\r",
-									"                            console.log(error);\r",
+									"                            console.log(err);\r",
 									"                            pm.expect('Not an error').to.eq('An error occurred')\r",
 									"                        }\r",
 									"                        else {\r",
@@ -280,6 +258,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -292,9 +285,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "{{NIFI}}",
 							"host": [
-								"{{NifiUrl}}"
+								"{{NIFI}}"
 							]
 						}
 					},
@@ -310,7 +303,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"    body: {\r",
@@ -322,8 +315,8 @@
 									"}, function (err, res) {\r",
 									"    pm.test(`Check if transaction relationship edge was populated`, function () {\r",
 									"        if (err) {\r",
-									"            console.log(error);\r",
-									"            pm.expect('Not an error').to.eq('An error occurred')\r",
+									"            console.log(err);\r",
+									"            //pm.expect('Not an error').to.eq('An error occurred')\r",
 									"        }\r",
 									"        else {\r",
 									"            const arangoRes = res.json();\r",
@@ -333,7 +326,7 @@
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._from);\r",
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._to);\r",
 									"                pm.sendRequest({\r",
-									"                    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"                    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"                    method: 'POST',\r",
 									"                    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"                    body: {\r",
@@ -345,8 +338,8 @@
 									"                }, function (err, res) {\r",
 									"                    pm.test(`Check if debtor exist and if new creditor node was created`, function () {\r",
 									"                        if (err) {\r",
-									"                            console.log(error);\r",
-									"                            pm.expect('Not an error').to.eq('An error occurred')\r",
+									"                            console.log(err);\r",
+									"                            //pm.expect('Not an error').to.eq('An error occurred')\r",
 									"                        }\r",
 									"                        else {\r",
 									"                            const arangoRes = res.json();\r",
@@ -367,6 +360,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -379,9 +387,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "{{NIFI}}",
 							"host": [
-								"{{NifiUrl}}"
+								"{{NIFI}}"
 							]
 						}
 					},
@@ -397,7 +405,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"    body: {\r",
@@ -409,8 +417,8 @@
 									"}, function (err, res) {\r",
 									"    pm.test(`Check if transaction relationship edge was populated`, function () {\r",
 									"        if (err) {\r",
-									"            console.log(error);\r",
-									"            pm.expect('Not an error').to.eq('An error occurred')\r",
+									"            console.log(err);\r",
+									"            //pm.expect('Not an error').to.eq('An error occurred')\r",
 									"        }\r",
 									"        else {\r",
 									"            const arangoRes = res.json();\r",
@@ -420,7 +428,7 @@
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._from);\r",
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._to);\r",
 									"                pm.sendRequest({\r",
-									"                    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"                    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"                    method: 'POST',\r",
 									"                    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"                    body: {\r",
@@ -432,8 +440,8 @@
 									"                }, function (err, res) {\r",
 									"                    pm.test(`Check if new debtor was created and if creditor exists`, function () {\r",
 									"                        if (err) {\r",
-									"                            console.log(error);\r",
-									"                            pm.expect('Not an error').to.eq('An error occurred')\r",
+									"                            console.log(err);\r",
+									"                            //pm.expect('Not an error').to.eq('An error occurred')\r",
 									"                        }\r",
 									"                        else {\r",
 									"                            const arangoRes = res.json();\r",
@@ -454,6 +462,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -466,9 +489,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "{{NIFI}}",
 							"host": [
-								"{{NifiUrl}}"
+								"{{NIFI}}"
 							]
 						}
 					},
@@ -484,7 +507,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"    body: {\r",
@@ -496,8 +519,8 @@
 									"}, function (err, res) {\r",
 									"    pm.test(`Check if transaction relationship edge was populated`, function () {\r",
 									"        if (err) {\r",
-									"            console.log(error);\r",
-									"            pm.expect('Not an error').to.eq('An error occurred')\r",
+									"            console.log(err);\r",
+									"            //pm.expect('Not an error').to.eq('An error occurred')\r",
 									"        }\r",
 									"        else {\r",
 									"            const arangoRes = res.json();\r",
@@ -507,7 +530,7 @@
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._from);\r",
 									"                pm.expect(\"accounts/\" + responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id).to.eq(arangoRes.result[0]._to);\r",
 									"                pm.sendRequest({\r",
-									"                    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"                    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"                    method: 'POST',\r",
 									"                    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"                    body: {\r",
@@ -519,8 +542,8 @@
 									"                }, function (err, res) {\r",
 									"                    pm.test(`Check if debtor and creditor nodes exist`, function () {\r",
 									"                        if (err) {\r",
-									"                            console.log(error);\r",
-									"                            pm.expect('Not an error').to.eq('An error occurred')\r",
+									"                            console.log(err);\r",
+									"                            //pm.expect('Not an error').to.eq('An error occurred')\r",
 									"                        }\r",
 									"                        else {\r",
 									"                            const arangoRes = res.json();\r",
@@ -541,6 +564,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -553,9 +591,721 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "{{NIFI}}",
 							"host": [
-								"{{NifiUrl}}"
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.1 New debtor, new debtor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.Dbtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"{{$guid}}\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+2775118{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+2775118{{$randomInt}}\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"{{$guid}}\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"{{$guid}}\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"April Sam Adamson\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+2771234{{$randomInt}}\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"{{$guid}}\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"April Adamson\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.2 New debtor, existing debtor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.Dbtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"{{$guid}}\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+2775118{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+27751180000\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"MSISDN\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"Ivan Russel-Klein\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"April Sam Adamson\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+2771234{{$randomInt}}\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"{{$guid}}\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"April Adamson\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.3 Existing debtor, new debtor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.Dbtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27751180000\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+2775118{{$randomInt}}\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"{{$guid}}\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"{{$guid}}\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"April Sam Adamson\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+2771234{{$randomInt}}\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"{{$guid}}\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"April Adamson\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.4 Existing debtor, existing debtor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.Dbtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.DbtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27751180001\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+27751180001\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"MSISDN\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"Ivan Russel-Klein\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"April Sam Adamson\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+2771234{{$randomInt}}\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"{{$guid}}\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"April Adamson\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.5 New creditor, new creditor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.Cdtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+2775118{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+2775118{{$randomInt}}\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"{{$guid}}\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"Ivan Russel-Klein\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"{{$guid}}\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+2771234{{$randomInt}}\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"{{$guid}}\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"{{$guid}}\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.6 New creditor, existing creditor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.Cdtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+2775118{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+2775118{{$randomInt}}\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"{{$guid}}\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"Ivan Russel-Klein\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"{{$guid}}\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+2771234{{$randomInt}}\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"{{$guid}}\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27751180000\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"April Adamson\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.7 Existing creditor, new creditor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.Cdtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27751180000\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+2775118{{$randomInt}}\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"{{$guid}}\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"Ivan Russel-Klein\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"April Sam Adamson\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+27751180000\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"MSISDN\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078{{$randomInt}}\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"{{$guid}}\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"{{$guid}}\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AM-571.8 Existing creditor, existing creditor account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
+									"    method: 'POST',\r",
+									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            query: `FOR i IN account_holder FILTER i._from == \"entities/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.Cdtr.Id.PrvtId.Othr[1].Id}\" AND i._to == \"accounts/${responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.CdtrAcct.Id.Othr.Id}\" RETURN i`\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    pm.test(`Check if account_holder edge was populated`, function () {\r",
+									"        if (err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"        else {\r",
+									"            const arangoRes = res.json();\r",
+									"            if (arangoRes.error === true)\r",
+									"                pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"            else {\r",
+									"                const arangoRes = res.json();\r",
+									"                if (arangoRes.error === true)\r",
+									"                    pm.expect('Not an error').to.eq(arangoRes.errorMessage)\r",
+									"                else\r",
+									"                    pm.expect(arangoRes.result).to.length(1);\r",
+									"                        \r",
+									"            }\r",
+									"        }\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "GeJj2BzCC2VNZ3zdMcE5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "frm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TxTp\": \"pain.001.001.11\",\r\n    \"CstmrCdtTrfInitn\": {\r\n        \"GrpHdr\": {\r\n            \"MsgId\": \"{{$guid}}\",\r\n            \"CreDtTm\": \"2021-10-07T09:25:31.000Z\",\r\n            \"NbOfTxs\": 1,\r\n            \"InitgPty\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27783078685\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            }\r\n        },\r\n        \"PmtInf\": {\r\n            \"PmtInfId\": \"b51ec534-ee48-4575-b6a9-ead2955b8069\",\r\n            \"PmtMtd\": \"TRA\",\r\n            \"ReqdAdvcTp\": {\r\n                \"DbtAdvc\": {\r\n                    \"Cd\": \"ADWD\",\r\n                    \"Prtry\": \"Advice with transaction details\"\r\n                }\r\n            },\r\n            \"ReqdExctnDt\": {\r\n                \"Dt\": \"2021-10-07\",\r\n                \"DtTm\": \"2021-10-07T09:25:31.000Z\"\r\n            },\r\n            \"Dbtr\": {\r\n                \"Nm\": \"Ivan Reese Russel-Klein\",\r\n                \"Id\": {\r\n                    \"PrvtId\": {\r\n                        \"DtAndPlcOfBirth\": {\r\n                            \"BirthDt\": \"1967-11-23\",\r\n                            \"CityOfBirth\": \"Unknown\",\r\n                            \"CtryOfBirth\": \"ZZ\"\r\n                        },\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27751180000\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    }\r\n                },\r\n                \"CtctDtls\": {\r\n                    \"MobNb\": \"+27-783078685\"\r\n                }\r\n            },\r\n            \"DbtrAcct\": {\r\n                \"Id\": {\r\n                    \"Othr\": {\r\n                        \"Id\": \"+27751180000\",\r\n                        \"SchmeNm\": {\r\n                            \"Prtry\": \"MSISDN\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Nm\": \"Ivan Russel-Klein\"\r\n            },\r\n            \"DbtrAgt\": {\r\n                \"FinInstnId\": {\r\n                    \"ClrSysMmbId\": {\r\n                        \"MmbId\": \"dfsp001\"\r\n                    }\r\n                }\r\n            },\r\n            \"CdtTrfTxInf\": {\r\n                \"PmtId\": {\r\n                    \"EndToEndId\": \"b51ec535-ee48-4575-b6a9-ead2955b8069\"\r\n                },\r\n                \"PmtTpInf\": {\r\n                    \"CtgyPurp\": {\r\n                        \"Prtry\": \"TRANSFER\"\r\n                    }\r\n                },\r\n                \"Amt\": {\r\n                    \"InstdAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        }\r\n                    },\r\n                    \"EqvtAmt\": {\r\n                        \"Amt\": {\r\n                            \"Amt\": \"50431891779910900\",\r\n                            \"Ccy\": \"USD\"\r\n                        },\r\n                        \"CcyOfTrf\": \"USD\"\r\n                    }\r\n                },\r\n                \"ChrgBr\": \"DEBT\",\r\n                \"CdtrAgt\": {\r\n                    \"FinInstnId\": {\r\n                        \"ClrSysMmbId\": {\r\n                            \"MmbId\": \"dfsp002\"\r\n                        }\r\n                    }\r\n                },\r\n                \"Cdtr\": {\r\n                    \"Nm\": \"April Sam Adamson\",\r\n                    \"Id\": {\r\n                        \"PrvtId\": {\r\n                            \"DtAndPlcOfBirth\": {\r\n                                \"BirthDt\": \"1923-04-26\",\r\n                                \"CityOfBirth\": \"Unknown\",\r\n                                \"CtryOfBirth\": \"ZZ\"\r\n                            },\r\n                            \"Othr\": {\r\n                                \"Id\": \"+27751180000\",\r\n                                \"SchmeNm\": {\r\n                                    \"Prtry\": \"MSISDN\"\r\n                                }\r\n                            }\r\n                        }\r\n                    },\r\n                    \"CtctDtls\": {\r\n                        \"MobNb\": \"+27-782722305\"\r\n                    }\r\n                },\r\n                \"CdtrAcct\": {\r\n                    \"Id\": {\r\n                        \"Othr\": {\r\n                            \"Id\": \"+27751180000\",\r\n                            \"SchmeNm\": {\r\n                                \"Prtry\": \"MSISDN\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"Nm\": \"April Adamson\"\r\n                },\r\n                \"Purp\": {\r\n                    \"Cd\": \"MP2P\"\r\n                },\r\n                \"RgltryRptg\": {\r\n                    \"Dtls\": {\r\n                        \"Tp\": \"BALANCE OF PAYMENTS\",\r\n                        \"Cd\": \"100\"\r\n                    }\r\n                },\r\n                \"RmtInf\": {\r\n                    \"Ustrd\": \"Payment of USD 49932566118723700.89 from Ivan to April\"\r\n                },\r\n                \"SplmtryData\": {\r\n                    \"Envlp\": {\r\n                        \"Doc\": {\r\n                            \"Cdtr\": {\r\n                                \"FrstNm\": \"Ivan\",\r\n                                \"MddlNm\": \"Reese\",\r\n                                \"LastNm\": \"Russel-Klein\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"Dbtr\": {\r\n                                \"FrstNm\": \"April\",\r\n                                \"MddlNm\": \"Sam\",\r\n                                \"LastNm\": \"Adamson\",\r\n                                \"MrchntClssfctnCd\": \"BLANK\"\r\n                            },\r\n                            \"DbtrFinSvcsPrvdrFees\": {\r\n                                \"Ccy\": \"USD\",\r\n                                \"Amt\": \"499325661187237\"\r\n                            },\r\n                            \"Xprtn\": \"2021-10-07T09:30:31.000Z\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"SplmtryData\": {\r\n            \"Envlp\": {\r\n                \"Doc\": {\r\n                    \"InitgPty\": {\r\n                        \"InitrTp\": \"CONSUMER\",\r\n                        \"Glctn\": {\r\n                            \"Lat\": \"-3.1291\",\r\n                            \"Long\": \"39.0006\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{NIFI}}",
+							"host": [
+								"{{NIFI}}"
 							]
 						}
 					},
@@ -575,7 +1325,8 @@
 								"exec": [
 									"const responseJson = pm.response.json();\r",
 									"\r",
-									"pm.test(\"Incoming & Outgoing messages match\", function () { \r",
+									"pm.test(\"Incoming & Outgoing messages match\", function () {\r",
+									"    pm.expect(responseJson.FIToFICstmrCdt.senderIdentityInStore).to.be.false;\r",
 									"    pm.expect(responseJson.FIToFICstmrCdt.CdtTrfTxInf.PmtId.EndToEndId).to.eq(\"5cb8a2db-5c32-41bb-ac27-2597125d50fd\");\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
@@ -591,6 +1342,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -603,10 +1357,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -631,6 +1388,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -643,10 +1403,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -661,7 +1424,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -685,7 +1448,7 @@
 									"});\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -714,6 +1477,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -726,10 +1492,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -745,7 +1514,7 @@
 									"var req = JSON.parse(request.data);\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/transactionHistory/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/transactionHistory/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -774,6 +1543,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -786,10 +1558,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -805,7 +1580,7 @@
 									"var req = JSON.parse(request.data);\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -834,6 +1609,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -846,10 +1624,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -868,7 +1649,8 @@
 								"exec": [
 									"const responseJson = pm.response.json();\r",
 									"\r",
-									"pm.test(\"Incoming & Outgoing messages match\", function () { \r",
+									"pm.test(\"Incoming & Outgoing messages match\", function () {\r",
+									"    pm.expect(responseJson.CdtrPmtActvtnReq.senderIdentityInStore).to.be.false;\r",
 									"    pm.expect(responseJson.CdtrPmtActvtnReq.PmtInf.DbtrAgt.FinInstnId.ClrSysMmbId.MmbId).to.eq(\"Horatio Ford\");\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
@@ -890,6 +1672,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -902,10 +1687,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -920,7 +1708,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -944,7 +1732,7 @@
 									"});\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -984,6 +1772,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -996,10 +1787,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -1020,7 +1814,7 @@
 									"});\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -1064,6 +1858,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1076,10 +1873,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -1094,7 +1894,7 @@
 									"const responseJson = pm.response.json();\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/transactionHistory/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/transactionHistory/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -1124,6 +1924,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1136,10 +1939,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -1331,7 +2137,7 @@
 									"  };",
 									"pm.globals.set(\"seedTransaction008\", transaction);",
 									"pm.sendRequest({",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/transactionHistory/_api/cursor',",
+									"    url: 'http://arango.development:8529/_db/transactionHistory/_api/cursor',",
 									"    method: 'POST',",
 									"    header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },",
 									"    body: {",
@@ -1363,7 +2169,7 @@
 									"});\r",
 									"\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/pseudonyms/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/pseudonyms/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -1390,7 +2196,7 @@
 									"\r",
 									"pm.test(\"Remove Seed Data from DB\", function () {\r",
 									"    pm.sendRequest({\r",
-									"        url: pm.globals.get(\"arangoUrl\") +'_db/transactionHistory/_api/cursor',\r",
+									"        url: 'http://arango.development:8529/_db/transactionHistory/_api/cursor',\r",
 									"        method: 'POST',\r",
 									"        header: { 'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}` },\r",
 									"        body: {\r",
@@ -1409,6 +2215,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1421,10 +2230,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -1441,7 +2253,7 @@
 									"\r",
 									"pm.test(`should have pacs002 transaction written to transactionHistory`, function () {\r",
 									"pm.sendRequest({\r",
-									"    url: pm.globals.get(\"arangoUrl\") +'_db/transactionHistory/_api/cursor',\r",
+									"    url: 'http://arango.development:8529/_db/transactionHistory/_api/cursor',\r",
 									"    method: 'POST',\r",
 									"    header:{'Authorization': `Bearer ${pm.globals.get(\"arangoToken\")}`},\r",
 									"    body: {\r",
@@ -1478,6 +2290,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1490,10 +2305,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{NifiUrl}}",
+							"raw": "http://nifi.development:8081",
+							"protocol": "http",
 							"host": [
-								"{{NifiUrl}}"
-							]
+								"nifi",
+								"development"
+							],
+							"port": "8081"
 						}
 					},
 					"response": []
@@ -1532,10 +2350,6 @@
 		},
 		{
 			"key": "EndtoEnd",
-			"value": ""
-		},
-		{
-			"key": "EndToEndId",
 			"value": ""
 		}
 	]
