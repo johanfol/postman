@@ -259,19 +259,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -361,19 +349,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -463,19 +439,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -565,19 +529,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -654,19 +606,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -743,19 +683,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -832,19 +760,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -921,19 +837,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -1010,19 +914,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -1099,19 +991,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -1188,19 +1068,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -1277,19 +1145,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "GeJj2BzCC2VNZ3zdMcE5",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "frm",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
