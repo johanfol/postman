@@ -18,7 +18,6 @@
                   "const responseJson = pm.response.json();\r",
                   "\r",
                   "pm.test(\"Incoming & Outgoing messages match\", function () {\r",
-                  "    pm.expect(responseJson.CstmrCdtTrfInitn.senderIdentityInStore).to.be.false;\r",
                   "    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.PmtId.EndToEndId).to.eq(\"b51ec535-ee48-4575-b6a9-ead2955b8069\");\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
@@ -158,7 +157,6 @@
                 "exec": [
                   "pm.test(\"Incoming & Outgoing messages match\", function () {\r",
                   "    const responseJson = pm.response.json();\r",
-                  "    pm.expect(responseJson.CstmrCdtTrfInitn.senderIdentityInStore).to.be.false;\r",
                   "    pm.expect(responseJson.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.PmtId.EndToEndId).to.eq(\"b51ec535-ee48-4575-b6a9-ead2955b8069\");\r",
                   "    pm.response.to.have.status(200);\r",
                   "});"
@@ -1663,7 +1661,6 @@
                   "const responseJson = pm.response.json();\r",
                   "\r",
                   "pm.test(\"Incoming & Outgoing messages match\", function () {\r",
-                  "    pm.expect(responseJson.FIToFICstmrCdt.senderIdentityInStore).to.be.false;\r",
                   "    pm.expect(responseJson.FIToFICstmrCdt.CdtTrfTxInf.PmtId.EndToEndId).to.eq(\"5cb8a2db-5c32-41bb-ac27-2597125d50fd\");\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
@@ -1987,7 +1984,6 @@
                   "const responseJson = pm.response.json();\r",
                   "\r",
                   "pm.test(\"Incoming & Outgoing messages match\", function () {\r",
-                  "    pm.expect(responseJson.CdtrPmtActvtnReq.senderIdentityInStore).to.be.false;\r",
                   "    pm.expect(responseJson.CdtrPmtActvtnReq.PmtInf.DbtrAgt.FinInstnId.ClrSysMmbId.MmbId).to.eq(\"Horatio Ford\");\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
