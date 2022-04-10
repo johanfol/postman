@@ -245,7 +245,7 @@
 									"    pm.expect(jsonData.result[0].report.status).to.eql(\"NALT\")\r",
 									"    pm.expect(jsonData.result[0].report.tadpResult.channelResult[0].typologyResult[0].ruleResults[0].result).to.eql(false);\r",
 									"    pm.expect(jsonData.result[0].report.tadpResult.channelResult[0].typologyResult[0].ruleResults[0].subRuleRef).to.eql(\".00\");\r",
-									"    pm.expect(jsonData.result[0].report.tadpResult.channelResult[0].typologyResult[0].ruleResults[0].reason).to.eql(\"Debtor account is not watch-listed\");\r",
+									"    pm.expect(jsonData.result[0].report.tadpResult.channelResult[0].typologyResult[0].ruleResults[0].reason).to.eql(\"Insufficient transaction history\");\r",
 									"});"
 								],
 								"type": "text/javascript"
