@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d13872b9-3adf-4da2-af19-f74fc616b966",
+		"_postman_id": "919329f4-dddc-477d-b2da-fe6d20f99984",
 		"name": "Rule-016Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -17,7 +17,7 @@
 								"exec": [
 									"const jsonData = pm.response.json();",
 									"var req = JSON.parse(request.data);",
-									"",
+									"console.log(req)",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -48,8 +48,8 @@
 									"\r",
 									"var uuid = require('uuid');\r",
 									"var myUUID = uuid.v4();\r",
-									"pm.collectionVariables.set(\"transactionID\", myUUID.slice(-32));\r",
-									"\r",
+									"pm.collectionVariables.set(\"transactionID\", myUUID.slice(-32)); \r",
+									"console.log(pm.collectionVariables.get(\"transactionID\"))\r",
 									"const msgId = pm.collectionVariables.get(\"transactionID\");\r",
 									"const arangourl = pm.environment.get('arangourl');\r",
 									"\r",
@@ -179,7 +179,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"TxTp\": \"pacs.002.001.12\",\n  \"FIToFIPmtSts\": {\n    \"GrpHdr\": {\n      \"MsgId\": \"{{transactionID}}\",\n      \"CreDtTm\": \"2021-11-03T07:24:48.000Z\"\n    },\n    \"TxInfAndSts\": {\n      \"OrgnlInstrId\": \"2f68ae16-467a-4ac4-ba32-eb5\",\n      \"OrgnlEndToEndId\": \"5cb8a2db-5c32-41bb-ac27\",\n      \"TxSts\": \"ACCC\",\n      \"ChrgsInf\": [\n        {\n          \"Amt\": {\n            \"Amt\": 157605510200862,\n            \"Ccy\": \"USD\"\n          },\n          \"Agt\": {\n            \"FinInstnId\": {\n              \"ClrSysMmbId\": {\n                \"MmbId\": \"dfsp001\"\n              }\n            }\n          }\n        },\n        {\n          \"Amt\": {\n            \"Amt\": 15918156530287100,\n            \"Ccy\": \"USD\"\n          },\n          \"Agt\": {\n            \"FinInstnId\": {\n              \"ClrSysMmbId\": {\n                \"MmbId\": \"dfsp001\"\n              }\n            }\n          }\n        },\n        {\n          \"Amt\": {\n            \"Amt\": 15918156530287100,\n            \"Ccy\": \"USD\"\n          },\n          \"Agt\": {\n            \"FinInstnId\": {\n              \"ClrSysMmbId\": {\n                \"MmbId\": \"dfsp002\"\n              }\n            }\n          }\n        }\n      ],\n      \"AccptncDtTm\": \"2021-11-03T07:24:47.000Z\",\n      \"InstgAgt\": {\n        \"FinInstnId\": {\n          \"ClrSysMmbId\": {\n            \"MmbId\": \"dfsp001\"\n          }\n        }\n      },\n      \"InstdAgt\": {\n        \"FinInstnId\": {\n          \"ClrSysMmbId\": {\n            \"MmbId\": \"dfsp002\"\n          }\n        }\n      }\n    }\n  }\n}",
+							"raw": "{\n    \"TxTp\": \"pacs.002.001.12\",\n    \"FIToFIPmtSts\": {\n        \"GrpHdr\": {\n            \"MsgId\": \"{{transactionID}}\",\n            \"CreDtTm\": \"2021-12-03T15:24:27.000Z\"\n        },\n        \"TxInfAndSts\": {\n            \"OrgnlInstrId\": \"5ab4fc7355de4ef8a75b78b00a681ed2255\",\n            \"OrgnlEndToEndId\": \"2c516801007642dfb892944dde1cf845897\",\n            \"TxSts\": \"ACCC\",\n            \"ChrgsInf\": [\n                {\n                    \"Amt\": {\n                        \"Amt\": 307.14,\n                        \"Ccy\": \"USD\"\n                    },\n                    \"Agt\": {\n                        \"FinInstnId\": {\n                            \"ClrSysMmbId\": {\n                                \"MmbId\": \"dfsp001\"\n                            }\n                        }\n                    }\n                },\n                {\n                    \"Amt\": {\n                        \"Amt\": 153.57,\n                        \"Ccy\": \"USD\"\n                    },\n                    \"Agt\": {\n                        \"FinInstnId\": {\n                            \"ClrSysMmbId\": {\n                                \"MmbId\": \"dfsp001\"\n                            }\n                        }\n                    }\n                },\n                {\n                    \"Amt\": {\n                        \"Amt\": 30.71,\n                        \"Ccy\": \"USD\"\n                    },\n                    \"Agt\": {\n                        \"FinInstnId\": {\n                            \"ClrSysMmbId\": {\n                                \"MmbId\": \"dfsp002\"\n                            }\n                        }\n                    }\n                }\n            ],\n            \"AccptncDtTm\": \"2021-12-03T15:24:26.000Z\",\n            \"InstgAgt\": {\n                \"FinInstnId\": {\n                    \"ClrSysMmbId\": {\n                        \"MmbId\": \"dfsp001\"\n                    }\n                }\n            },\n            \"InstdAgt\": {\n                \"FinInstnId\": {\n                    \"ClrSysMmbId\": {\n                        \"MmbId\": \"dfsp002\"\n                    }\n                }\n            }\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -225,7 +225,7 @@
 									"      `\r",
 									"      for transaction In transactions\r",
 									"       FILTER transaction.transaction.FIToFIPmtSts.GrpHdr.MsgId == \r",
-									"       `+pm.collectionVariables.get(\"EndToEndId\")+`\r",
+									"       'jont-d4ca-402c-af4a-6ba8332a16dc1'\r",
 									"       return transaction ` \r",
 									"));\r",
 									"\r",
