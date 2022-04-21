@@ -140,7 +140,7 @@
 							"port": "8080",
 							"path": [
 								"function",
-								"off-transaction-monitoring-service",
+								"off-transaction-monitoring-service-rel-1-0-0",
 								"execute"
 							]
 						}
@@ -377,7 +377,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://gateway.openfaas:8080/function/off-transaction-monitoring-service/quoteReply",
+							"raw": "http://gateway.openfaas:8080/function/off-transaction-monitoring-service-rel-1-0-0/quoteReply",
 							"protocol": "http",
 							"host": [
 								"gateway",
@@ -386,7 +386,7 @@
 							"port": "8080",
 							"path": [
 								"function",
-								"off-transaction-monitoring-service",
+								"off-transaction-monitoring-service-rel-1-0-0",
 								"quoteReply"
 							]
 						}
@@ -521,7 +521,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://gateway.openfaas:8080/function/off-transaction-monitoring-service/transfer",
+							"raw": "http://gateway.openfaas:8080/function/off-transaction-monitoring-service-rel-1-0-0/transfer",
 							"protocol": "http",
 							"host": [
 								"gateway",
@@ -530,7 +530,7 @@
 							"port": "8080",
 							"path": [
 								"function",
-								"off-transaction-monitoring-service",
+								"off-transaction-monitoring-service-rel-1-0-0",
 								"transfer"
 							]
 						}
