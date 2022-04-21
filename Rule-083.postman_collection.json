@@ -925,13 +925,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/function/off-transaction-monitoring-service/transfer",
+							"raw": "{{baseUrl}}/function/off-transaction-monitoring-service-rel-1-0-0/transfer",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"function",
-								"off-transaction-monitoring-service",
+								"off-transaction-monitoring-service-rel-1-0-0",
 								"transfer"
 							]
 						}
@@ -1167,13 +1167,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/function/off-transaction-monitoring-service/quoteReply",
+							"raw": "{{baseUrl}}/function/off-transaction-monitoring-service-rel-1-0-0/quoteReply",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"function",
-								"off-transaction-monitoring-service",
+								"off-transaction-monitoring-service-rel-1-0-0",
 								"quoteReply"
 							]
 						}
@@ -1380,7 +1380,7 @@
 							],
 							"path": [
 								"function",
-								"off-transaction-monitoring-service",
+								"off-transaction-monitoring-service-rel-1-0-0",
 								"execute"
 							]
 						}
